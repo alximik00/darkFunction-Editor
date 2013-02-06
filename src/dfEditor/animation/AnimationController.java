@@ -44,11 +44,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import dfEditor.CustomComponents.*; 
 import javax.swing.JTextField;
-import javax.swing.plaf.basic.*;
-import java.awt.Dimension;
-import java.beans.PropertyVetoException;
 import java.awt.*;
-import java.awt.event.FocusListener;
+
 /**
  *
  * @author Owner
@@ -211,6 +208,15 @@ public class AnimationController extends dfEditorPanel implements
             e.finish();           
         }
     }
+
+    private void buildPngSheet(String filePath) {
+        Animation animation = this.getWorkingAnimation();
+        try {
+            PngSheetSaver.save(filePath, animation);
+        } catch (IOException e) {
+            //TODO: warn user
+        }
+    }
     
     private void showParseError()
     {        
@@ -325,6 +331,7 @@ public class AnimationController extends dfEditorPanel implements
         removeAnimationButton = new javax.swing.JButton();
         duplicateAnimationButton = new javax.swing.JButton();
         exportGifButton = new javax.swing.JButton();
+        exportPngSheetButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         animationPanel1 = new dfEditor.animation.AnimationPanel();
         playButton = new javax.swing.JButton();
@@ -458,6 +465,24 @@ public class AnimationController extends dfEditorPanel implements
             }
         });
 
+        exportPngSheetButton.setIcon(resourceMap.getIcon("exportGif.icon")); // NOI18N
+        exportPngSheetButton.setText("Export PNG sheet"); // NOI18N
+        exportPngSheetButton.setToolTipText(""); // NOI18N
+        exportPngSheetButton.setAlignmentX(0.5F);
+        exportPngSheetButton.setContentAreaFilled(false);
+        exportPngSheetButton.setEnabled(false);
+        exportPngSheetButton.setFocusable(false);
+        exportPngSheetButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        exportPngSheetButton.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        exportPngSheetButton.setMaximumSize(new java.awt.Dimension(100, 100));
+        exportPngSheetButton.setMinimumSize(new java.awt.Dimension(0, 0));
+        exportPngSheetButton.setName("exportPngSheetButton"); // NOI18N
+        exportPngSheetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportPngSheetButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -471,19 +496,22 @@ public class AnimationController extends dfEditorPanel implements
                 .addComponent(duplicateAnimationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exportGifButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(exportPngSheetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addAnimationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeAnimationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(duplicateAnimationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exportGifButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addAnimationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removeAnimationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(duplicateAnimationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(exportGifButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(exportPngSheetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel2.border.title"))); // NOI18N
@@ -1610,6 +1638,10 @@ private void exportGifButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     saveGifAs();
 }//GEN-LAST:event_exportGifButtonActionPerformed
 
+private void exportPngSheetButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    savePngSheetAs();
+}
+
     public void saveGifAs()
     {        
         JFileChooser chooser = fileChooser;
@@ -1650,6 +1682,50 @@ private void exportGifButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
             }
             break;
         }           
+    }
+
+    public void savePngSheetAs() {
+        if (this.getWorkingAnimation() == null || this.getWorkingAnimation().numCells()==0)
+            return;
+
+        JFileChooser chooser = fileChooser;
+
+        CustomFilter filter = new CustomFilter();
+        filter.addExtension(CustomFilter.EXT_PNG);
+        chooser.resetChoosableFileFilters();
+        chooser.setFileFilter(filter);
+        chooser.setDialogType(JFileChooser.SAVE_DIALOG);
+        chooser.setApproveButtonText("Export");
+        chooser.setDialogTitle("Export animation as PNG");
+        chooser.setSelectedFile(new File(this.getWorkingAnimation().getName() + "." + CustomFilter.EXT_PNG));
+        JFrame mainFrame = dfEditorApp.getApplication().getMainFrame();
+
+        while (true)
+        {
+            int returnVal = chooser.showSaveDialog(mainFrame);
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {
+                java.io.File f = chooser.getSelectedFile();
+                if(null == dfEditor.io.Utils.getExtension(f))
+                {
+                    f = new java.io.File(new String(f.getAbsolutePath() + "." + filter.getExtension()));
+                }
+
+                if (f.exists())
+                {
+                    //Custom button text
+                    int response = JOptionPane.showConfirmDialog (null,
+                            "Overwrite existing file?","Confirm Overwrite",
+                            JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.WARNING_MESSAGE);
+                    if (response == JOptionPane.CANCEL_OPTION)
+                        continue;
+                }
+
+                buildPngSheet(f.getAbsolutePath());
+            }
+            break;
+        }
     }
     
     public void animatedToCell(AnimationCell aCell)
@@ -2005,6 +2081,7 @@ private void exportGifButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 removeAnimationButton.setEnabled(bEnabled);
                 duplicateAnimationButton.setEnabled(bEnabled);
                 exportGifButton.setEnabled(bEnabled);
+                exportPngSheetButton.setEnabled(bEnabled);
             } 
             else if (list == spriteList)
             {
@@ -2142,6 +2219,7 @@ private void exportGifButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JSpinner delaySpinner;
     private javax.swing.JButton duplicateAnimationButton;
     private javax.swing.JButton exportGifButton;
+    private javax.swing.JButton exportPngSheetButton;
     private javax.swing.JCheckBox flipHCheckBox;
     private javax.swing.JCheckBox flipVCheckBox;
     private javax.swing.JLabel jLabel1;

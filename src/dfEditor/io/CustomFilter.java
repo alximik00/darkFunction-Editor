@@ -29,6 +29,7 @@ public class CustomFilter extends FileFilter
     public final static String EXT_ANIM = "anim";
     public final static String EXT_SPRITE = "sprites";
     public final static String EXT_GIF = "gif";
+    public final static String EXT_PNG = "png";
 
     private ArrayList<String> ext = null;
 

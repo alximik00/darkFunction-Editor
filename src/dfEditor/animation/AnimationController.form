@@ -107,6 +107,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="exportGifButton" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <Component id="exportPngSheet" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
               <Component id="jScrollPane2" alignment="0" pref="164" max="32767" attributes="1"/>
           </Group>
@@ -121,6 +123,7 @@
                       <Component id="removeAnimationButton" alignment="3" min="-2" pref="30" max="-2" attributes="1"/>
                       <Component id="duplicateAnimationButton" alignment="3" min="-2" pref="30" max="-2" attributes="1"/>
                       <Component id="exportGifButton" alignment="3" min="-2" pref="30" max="-2" attributes="1"/>
+                      <Component id="exportPngSheet" alignment="3" min="-2" pref="30" max="-2" attributes="1"/>
                   </Group>
               </Group>
           </Group>
@@ -253,6 +256,31 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportGifButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="exportPngSheet">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="exportGif.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="exportGifButton.text"/>
+            <Property name="toolTipText" type="java.lang.String" resourceKey="exportGifButton.toolTipText"/>
+            <Property name="alignmentX" type="float" value="0.5"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[0, 0, 0, 0]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[100, 100]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[0, 0]"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="exportPngSheet" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportPngSheetButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
