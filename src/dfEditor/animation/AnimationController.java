@@ -214,7 +214,7 @@ public class AnimationController extends dfEditorPanel implements
         try {
             PngSheetSaver.save(filePath, animation);
         } catch (IOException e) {
-            //TODO: warn user
+            JOptionPane.showMessageDialog(dfEditorApp.getApplication().getMainFrame(), "Could not save file due to error");
         }
     }
     
@@ -381,7 +381,7 @@ public class AnimationController extends dfEditorPanel implements
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel1.border.title"))); // NOI18N
         jPanel1.setFocusable(false);
         jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(180, 179));
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 200));
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
@@ -465,9 +465,9 @@ public class AnimationController extends dfEditorPanel implements
             }
         });
 
-        exportPngSheetButton.setIcon(resourceMap.getIcon("exportGif.icon")); // NOI18N
-        exportPngSheetButton.setText("Export PNG sheet"); // NOI18N
-        exportPngSheetButton.setToolTipText(""); // NOI18N
+        exportPngSheetButton.setIcon(resourceMap.getIcon("exportPngSheetButton.icon")); // NOI18N
+        exportPngSheetButton.setText(""); // NOI18N
+        exportPngSheetButton.setToolTipText(resourceMap.getString("exportPngSheetButton.toolTipText")); // NOI18N
         exportPngSheetButton.setAlignmentX(0.5F);
         exportPngSheetButton.setContentAreaFilled(false);
         exportPngSheetButton.setEnabled(false);
@@ -499,7 +499,7 @@ public class AnimationController extends dfEditorPanel implements
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(exportPngSheetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,7 +517,7 @@ public class AnimationController extends dfEditorPanel implements
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel2.border.title"))); // NOI18N
         jPanel2.setFocusable(false);
         jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setPreferredSize(new java.awt.Dimension(173, 173));
+        jPanel2.setPreferredSize(new java.awt.Dimension(190, 190));
 
         animationPanel1.setBackground(resourceMap.getColor("animationPanel1.background")); // NOI18N
         animationPanel1.setName("animationPanel1"); // NOI18N
@@ -758,13 +758,13 @@ public class AnimationController extends dfEditorPanel implements
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spritePreviewPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(spritePreviewPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spritePreviewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1092,8 +1092,8 @@ public class AnimationController extends dfEditorPanel implements
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1124,8 +1124,8 @@ public class AnimationController extends dfEditorPanel implements
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, 0, 173, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
+                    .addComponent(jPanel3, 0, 190, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
