@@ -124,7 +124,7 @@
        <taskdef name="izpack" classpath="./izpack/standalone-compiler.jar"
             classname="com.izforge.izpack.ant.IzPackTask"/>       
        <izpack  input="${basedir}/izpack/dFEditor Installer.xml" 
-                output="${basedir}/izpack/dfEditor Installer.jar" 
+                output="${basedir}/izpack/dFEditor Installer.jar"
                 basedir="${basedir}/izpack/"
        />
 
